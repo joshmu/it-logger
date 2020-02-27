@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import SearchBar from './components/layout/SearchBar'
 import Logs from './components/logs/Logs'
+import AddBtn from './components/layout/AddBtn'
 
 import '../node_modules/materialize-css/dist/css/materialize.min.css'
 import './App.css'
@@ -19,6 +20,7 @@ function App() {
       <div className="container">
         <Logs />
       </div>
+      <AddBtn />
     </>
   )
 }
