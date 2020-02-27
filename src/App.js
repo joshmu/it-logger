@@ -6,6 +6,7 @@ import AddBtn from './components/layout/AddBtn'
 import AddLogModal from './components/logs/AddLogModal'
 import EditLogModal from './components/logs/EditLogModal'
 import AddTechModal from './components/techs/AddTechModal'
+import TechListModal from './components/techs/TechListModal'
 
 import 'materialize-css/dist/css/materialize.min.css'
 import './App.css'
@@ -14,6 +15,7 @@ import M from '../node_modules/materialize-css/dist/js/materialize.min.js'
 
 function App() {
   useEffect(() => {
+    // Init Materialize JS
     M.AutoInit()
     // eslint-disable-next-line
   }, [])
@@ -23,6 +25,7 @@ function App() {
       <AddLogModal />
       <EditLogModal />
       <AddTechModal />
+      <TechListModal />
       <AddBtn />
       <div className="container">
         <LogList />
