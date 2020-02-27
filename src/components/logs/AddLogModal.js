@@ -7,7 +7,6 @@ const AddLogModal = () => {
   const [tech, setTech] = useState('')
 
   const [techs, setTechs] = useState([])
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getTechs()
@@ -18,7 +17,6 @@ const AddLogModal = () => {
     const res = await fetch('/techs')
     const data = await res.json()
     setTechs(data)
-    setLoading(false)
   }
 
   const onSubmit = async () => {
@@ -26,33 +24,14 @@ const AddLogModal = () => {
       M.toast({ html: 'Message & Tech required.' })
     } else {
       M.toast({ html: 'Log Submitted.' })
+      clearFields()
     }
-    return
-    /*
-    const data = {
-      message,
-      attention,
-      date: Date.now(),
-      tech
-    }
-    try {
-      await fetch('/logs', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+  }
 
-      // reset state
-      setMessage('')
-      setAttention(false)
-      setTech('')
-      console.log('success')
-    } catch (err) {
-      console.err(err)
-    }
-    */
+  const clearFields = () => {
+    setMessage('')
+    setAttention(false)
+    setTech('')
   }
 
   return (

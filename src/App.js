@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import SearchBar from './components/layout/SearchBar'
-import Logs from './components/logs/Logs'
+import LogList from './components/logs/LogList'
 import AddBtn from './components/layout/AddBtn'
 import AddLogModal from './components/logs/AddLogModal'
 
@@ -20,7 +20,7 @@ function App() {
       <SearchBar />
       <AddLogModal />
       <div className="container">
-        <Logs />
+        <LogList />
       </div>
       <AddBtn />
     </>
