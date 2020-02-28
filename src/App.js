@@ -7,6 +7,8 @@ import AddLogModal from './components/logs/AddLogModal'
 import EditLogModal from './components/logs/EditLogModal'
 import AddTechModal from './components/techs/AddTechModal'
 import TechListModal from './components/techs/TechListModal'
+import { Provider } from 'react-redux';
+import store from './store'
 
 import 'materialize-css/dist/css/materialize.min.css'
 import './App.css'
@@ -21,6 +23,8 @@ function App() {
   }, [])
   return (
     <>
+    <Provider store={store}>
+
       <SearchBar />
       <AddLogModal />
       <EditLogModal />
@@ -30,6 +34,8 @@ function App() {
       <div className="container">
         <LogList />
       </div>
+
+    </Provider>
     </>
   )
 }
