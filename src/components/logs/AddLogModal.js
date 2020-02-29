@@ -24,7 +24,7 @@ const AddLogModal = ({ addLog }) => {
 
   const onSubmit = async () => {
     if (message === '' || tech === '') {
-      M.toast({ html: 'Message & Tech required.' })
+      M.toast({ html: 'More details required.', classes: 'red darken-2' })
     } else {
       const newLog = {
         message,

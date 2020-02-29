@@ -3,8 +3,14 @@ import { connect } from 'react-redux'
 import { removeLog } from '../../actions/logActions'
 import Moment from 'react-moment'
 import PropTypes from 'prop-types'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 const LogItem = ({ log, removeLog }) => {
+  const onRemove = () => {
+    removeLog(log.id)
+    M.toast({ html: `Log #${log.id} removed.` })
+  }
+
   return (
     <li className="collection-item">
       <a
@@ -21,10 +27,7 @@ const LogItem = ({ log, removeLog }) => {
         <span className="black-text">{log.tech}</span> on{' '}
         <Moment format="MMMM Do YYYY, h:mm:ss a">{log.date}</Moment>
         <a href="#!" className="secondary-content">
-          <i
-            className="material-icons grey-text"
-            onClick={() => removeLog(log.id)}
-          >
+          <i className="material-icons grey-text" onClick={onRemove}>
             delete
           </i>
         </a>
