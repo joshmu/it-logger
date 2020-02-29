@@ -27,13 +27,6 @@
       "date": 1582773727715,
       "tech": "Sara Wilson",
       "id": 7
-    },
-    {
-      "message": "blah blah",
-      "attention": true,
-      "tech": "John Doe",
-      "date": "2020-02-29T04:01:55.186Z",
-      "id": 8
     }
   ],
   "techs": [
