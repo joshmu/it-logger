@@ -8,18 +8,18 @@
       "id": 4
     },
     {
-      "message": "Changed harddrive on workstation 005",
+      "message": "Changed harddrive on workstation 007",
       "attention": false,
-      "date": 1582773695852,
       "tech": "John Doe",
-      "id": 5
+      "id": 5,
+      "date": "2020-03-01T05:48:38.578Z"
     },
     {
-      "message": "Workstation 002 not posting",
+      "message": "Workstation 002 has crashed",
       "attention": true,
-      "date": 1582773714632,
-      "tech": "Sam Smith",
-      "id": 6
+      "tech": "Sara Wilson",
+      "id": 6,
+      "date": "2020-03-01T05:48:00.068Z"
     },
     {
       "message": "Changed memory on workstation 050",

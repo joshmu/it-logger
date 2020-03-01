@@ -104,7 +104,7 @@ const AddLogModal = ({ addLog }) => {
           className="modal-close waves-effect waves-green btn indigo"
           onClick={onSubmit}
         >
-          Enter
+          Add
         </a>
       </div>
     </div>

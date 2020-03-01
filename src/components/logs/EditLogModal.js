@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { clearCurrent, updateLog } from '../../actions/logActions'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import PropTypes from 'prop-types'
 
-const EditLogModal = () => {
+const EditLogModal = ({ log, clearCurrent, updateLog }) => {
   const [message, setMessage] = useState('')
   const [attention, setAttention] = useState(false)
   const [tech, setTech] = useState('')
@@ -9,9 +12,15 @@ const EditLogModal = () => {
   const [techs, setTechs] = useState([])
 
   useEffect(() => {
-    getTechs()
+    if (techs.length === 0) getTechs()
+    if (log !== null) {
+      setMessage(log.message)
+      setAttention(log.attention)
+      setTech(log.tech)
+      setTimeout(M.updateTextFields, 1)
+    }
     // eslint-disable-next-line
-  }, [])
+  }, [log])
 
   const getTechs = async () => {
     const res = await fetch('/techs')
@@ -23,15 +32,17 @@ const EditLogModal = () => {
     if (message === '' || tech === '') {
       M.toast({ html: 'Message & Tech required.' })
     } else {
-      M.toast({ html: 'Log Submitted.' })
-      clearFields()
+      const updatedLog = {
+        message,
+        attention,
+        tech,
+        id: log.id,
+        date: new Date()
+      }
+      updateLog(updatedLog)
+      M.toast({ html: `Log updated by ${tech}` })
+      clearCurrent()
     }
-  }
-
-  const clearFields = () => {
-    setMessage('')
-    setAttention(false)
-    setTech('')
   }
 
   return (
@@ -93,7 +104,7 @@ const EditLogModal = () => {
           className="modal-close waves-effect waves-green btn indigo"
           onClick={onSubmit}
         >
-          Enter
+          Update
         </a>
       </div>
     </div>
@@ -105,4 +116,14 @@ const modalStyle = {
   height: '75%'
 }
 
-export default EditLogModal
+EditLogModal.propTypes = {
+  log: PropTypes.object,
+  clearCurrent: PropTypes.func.isRequired,
+  updateLog: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({ log: state.log.current })
+
+export default connect(mapStateToProps, { clearCurrent, updateLog })(
+  EditLogModal
+)
