@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { clearCurrent, updateLog } from '../../actions/logActions'
+import { getTechs } from '../../actions/techActions'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import PropTypes from 'prop-types'
 
-const EditLogModal = ({ log, clearCurrent, updateLog }) => {
+const EditLogModal = ({ log, techs, clearCurrent, updateLog, getTechs }) => {
   const [message, setMessage] = useState('')
   const [attention, setAttention] = useState(false)
   const [tech, setTech] = useState('')
-
-  const [techs, setTechs] = useState([])
 
   useEffect(() => {
     if (techs.length === 0) getTechs()
@@ -21,12 +20,6 @@ const EditLogModal = ({ log, clearCurrent, updateLog }) => {
     }
     // eslint-disable-next-line
   }, [log])
-
-  const getTechs = async () => {
-    const res = await fetch('/techs')
-    const data = await res.json()
-    setTechs(data)
-  }
 
   const onSubmit = async () => {
     if (message === '' || tech === '') {
@@ -118,12 +111,17 @@ const modalStyle = {
 
 EditLogModal.propTypes = {
   log: PropTypes.object,
+  techs: PropTypes.array,
   clearCurrent: PropTypes.func.isRequired,
-  updateLog: PropTypes.func.isRequired
+  updateLog: PropTypes.func.isRequired,
+  getTechs: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({ log: state.logState.current })
+const mapStateToProps = state => ({
+  log: state.logState.current,
+  techs: state.techState.techs
+})
 
-export default connect(mapStateToProps, { clearCurrent, updateLog })(
+export default connect(mapStateToProps, { clearCurrent, updateLog, getTechs })(
   EditLogModal
 )
