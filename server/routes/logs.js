@@ -4,7 +4,7 @@ const router = express.Router()
 const Log = require('../models/Log.js')
 
 /**
- * @route   GET /logs
+ * @route   GET /api/logs
  * @desc    Get all logs
  * @access  Public
  */
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * @route   GET /logs/:_query
+ * @route   GET /api/logs/:_query
  * @desc    Search Logs
  * @access  Public
  */
@@ -37,7 +37,7 @@ router.get('/:query', async (req, res) => {
 })
 
 /**
- * @route   POST /logs
+ * @route   POST /api/logs
  * @desc    Add new contact
  * @access  Public
  */
@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
 })
 
 /**
- * @route   PUT /logs/:_id
+ * @route   PUT /api/logs/:_id
  * @desc    Update contact
  * @access  Public
  */
@@ -75,10 +75,7 @@ router.put('/:_id', async (req, res) => {
   if (date) updateLog.date = date
 
   try {
-    // find original log
-    let log = await Log.findById(req.params._id)
-
-    log = await Log.findByIdAndUpdate(
+    const log = await Log.findByIdAndUpdate(
       req.params._id,
       { ...req.body },
       { lean: true, new: true, upsert: true }
@@ -91,7 +88,7 @@ router.put('/:_id', async (req, res) => {
 })
 
 /**
- * @route   DELETE /logs/:_id
+ * @route   DELETE /api/logs/:_id
  * @desc    Remove log
  * @access  Public
  */

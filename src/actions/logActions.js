@@ -82,17 +82,18 @@ export const updateLog = log => async dispatch => {
   try {
     dispatch(setLoading())
 
-    await fetch(`/api/logs/${log._id}`, {
+    const res = await fetch(`/api/logs/${log.id}`, {
       method: 'put',
       body: JSON.stringify(log),
       headers: {
         'Content-Type': 'application/json'
       }
     })
+    const data = await res.json()
 
     dispatch({
       type: UPDATE_LOG,
-      payload: log
+      payload: data 
     })
   } catch (err) {
     dispatch({
