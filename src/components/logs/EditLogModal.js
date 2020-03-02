@@ -122,7 +122,7 @@ EditLogModal.propTypes = {
   updateLog: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({ log: state.log.current })
+const mapStateToProps = state => ({ log: state.logState.current })
 
 export default connect(mapStateToProps, { clearCurrent, updateLog })(
   EditLogModal
