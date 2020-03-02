@@ -15,11 +15,11 @@
       "date": "2020-03-01T05:48:38.578Z"
     },
     {
-      "message": "Workstation 002 has crashed",
+      "message": "Workstation 002 has crashed again",
       "attention": true,
-      "tech": "Sara Wilson",
+      "tech": "Sam Smith",
       "id": 6,
-      "date": "2020-03-01T05:48:00.068Z"
+      "date": "2020-03-02T01:53:49.940Z"
     },
     {
       "message": "Changed memory on workstation 050",

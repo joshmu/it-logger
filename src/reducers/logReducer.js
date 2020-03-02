@@ -33,16 +33,15 @@ export default (state = initialState, action) => {
     case DELETE_LOG:
       return {
         ...state,
-        logs: [...state.logs].filter(log => log.id !== action.payload),
+        logs: state.logs.filter(log => log.id !== action.payload),
         loading: false
       }
     case UPDATE_LOG:
       return {
         ...state,
-        logs: [
-          ...[...state.logs].filter(log => log.id !== action.payload.id),
-          action.payload
-        ],
+        logs: state.logs.map(log =>
+          log.id === action.payload.id ? action.payload : log
+        ),
         loading: false
       }
     case SET_CURRENT:
