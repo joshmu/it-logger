@@ -1,4 +1,4 @@
-import { GET_TECHS, TECH_ERROR, ADD_TECH } from './types'
+import { GET_TECHS, TECH_ERROR, ADD_TECH, DELETE_TECH } from './types'
 
 export const getTechs = () => async dispatch => {
   try {
@@ -42,6 +42,10 @@ export const removeTech = id => async dispatch => {
   try {
     await fetch(`/techs/${id}`, {
       method: 'delete'
+    })
+    dispatch({
+      type: DELETE_TECH,
+      payload: id
     })
   } catch (err) {
     dispatch({ type: TECH_ERROR, payload: err.response.data })
