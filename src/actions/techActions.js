@@ -1,7 +1,14 @@
-import { GET_TECHS, TECH_ERROR, ADD_TECH, DELETE_TECH } from './types'
+import {
+  GET_TECHS,
+  TECH_ERROR,
+  ADD_TECH,
+  DELETE_TECH,
+  SET_LOADING
+} from './types'
 
 export const getTechs = () => async dispatch => {
   try {
+    setLoading()
     const res = await fetch('/techs')
     const data = await res.json()
     dispatch({
@@ -18,6 +25,7 @@ export const getTechs = () => async dispatch => {
 
 export const addTech = tech => async dispatch => {
   try {
+    setLoading()
     const res = await fetch('/techs', {
       method: 'post',
       body: JSON.stringify(tech),
@@ -40,6 +48,7 @@ export const addTech = tech => async dispatch => {
 
 export const removeTech = id => async dispatch => {
   try {
+    setLoading()
     await fetch(`/techs/${id}`, {
       method: 'delete'
     })
@@ -49,5 +58,12 @@ export const removeTech = id => async dispatch => {
     })
   } catch (err) {
     dispatch({ type: TECH_ERROR, payload: err.response.data })
+  }
+}
+
+// Set loading to true
+export const setLoading = () => {
+  return {
+    type: SET_LOADING
   }
 }

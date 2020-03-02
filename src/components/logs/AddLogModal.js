@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addLog } from '../../actions/logActions'
-import { getTechs } from '../../actions/techActions'
-import M from 'materialize-css/dist/js/materialize.min.js'
 import PropTypes from 'prop-types'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
-const AddLogModal = ({ techs, addLog, getTechs }) => {
+import TechListOptions from '../techs/TechListOptions'
+
+const AddLogModal = ({ addLog }) => {
   const [message, setMessage] = useState('')
   const [attention, setAttention] = useState(false)
   const [tech, setTech] = useState('')
-
-  useEffect(() => {
-    getTechs()
-    // eslint-disable-next-line
-  }, [])
 
   const onSubmit = async () => {
     if (message === '' || tech === '') {
@@ -65,12 +61,7 @@ const AddLogModal = ({ techs, addLog, getTechs }) => {
               <option value="" disabled>
                 Select Technician
               </option>
-              {techs.map(t => (
-                <option
-                  value={`${t.firstName} ${t.lastName}`}
-                  key={t.id}
-                >{`${t.firstName} ${t.lastName}`}</option>
-              ))}
+              <TechListOptions />
             </select>
           </div>
         </div>
@@ -105,9 +96,7 @@ const AddLogModal = ({ techs, addLog, getTechs }) => {
 }
 
 AddLogModal.propTypes = {
-  addLog: PropTypes.func.isRequired,
-  getTechs: PropTypes.func.isRequired,
-  techs: PropTypes.array
+  addLog: PropTypes.func.isRequired
 }
 
 const modalStyle = {
@@ -115,10 +104,4 @@ const modalStyle = {
   height: '75%'
 }
 
-const mapStateToProps = state => {
-  return {
-    techs: state.techState.techs
-  }
-}
-
-export default connect(mapStateToProps, { addLog, getTechs })(AddLogModal)
+export default connect(null, { addLog })(AddLogModal)

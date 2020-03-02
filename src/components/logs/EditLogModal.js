@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { clearCurrent, updateLog } from '../../actions/logActions'
-import { getTechs } from '../../actions/techActions'
-import M from 'materialize-css/dist/js/materialize.min.js'
 import PropTypes from 'prop-types'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
-const EditLogModal = ({ log, techs, clearCurrent, updateLog, getTechs }) => {
+import TechListOptions from '../techs/TechListOptions'
+
+const EditLogModal = ({ log, clearCurrent, updateLog }) => {
   const [message, setMessage] = useState('')
   const [attention, setAttention] = useState(false)
   const [tech, setTech] = useState('')
 
   useEffect(() => {
-    if (techs.length === 0) getTechs()
     if (log !== null) {
       setMessage(log.message)
       setAttention(log.attention)
@@ -65,12 +65,7 @@ const EditLogModal = ({ log, techs, clearCurrent, updateLog, getTechs }) => {
               <option value="" disabled>
                 Select Technician
               </option>
-              {techs.map(t => (
-                <option
-                  value={`${t.firstName} ${t.lastName}`}
-                  key={t.id}
-                >{`${t.firstName} ${t.lastName}`}</option>
-              ))}
+              <TechListOptions />
             </select>
           </div>
         </div>
@@ -111,17 +106,14 @@ const modalStyle = {
 
 EditLogModal.propTypes = {
   log: PropTypes.object,
-  techs: PropTypes.array,
   clearCurrent: PropTypes.func.isRequired,
-  updateLog: PropTypes.func.isRequired,
-  getTechs: PropTypes.func.isRequired
+  updateLog: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  log: state.logState.current,
-  techs: state.techState.techs
+  log: state.logState.current
 })
 
-export default connect(mapStateToProps, { clearCurrent, updateLog, getTechs })(
+export default connect(mapStateToProps, { clearCurrent, updateLog })(
   EditLogModal
 )
