@@ -6,7 +6,8 @@ import {
   CLEAR_CURRENT,
   SET_LOADING,
   LOGS_ERROR,
-  UPDATE_LOG
+  UPDATE_LOG,
+  SEARCH_LOGS
 } from './types'
 
 // Get logs from server
@@ -99,6 +100,15 @@ export const updateLog = log => async dispatch => {
       payload: err.response.data
     })
   }
+}
+
+export const searchLogs = text => async dispatch => {
+  const res = await fetch(`/logs?q=${text}`)
+  const data = await res.json()
+  dispatch({
+    type: SEARCH_LOGS,
+    payload: data
+  })
 }
 
 export const setCurrent = log => dispatch => {
