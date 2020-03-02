@@ -17,10 +17,14 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
   },
+  "main": "server/server.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build && npm install --prefix server",
+    "start-react": "react-scripts start",
     "json-server": "json-server --watch db.json --port 5000",
     "dev": "concurrently \"npm start\" \"npm run json-server\"",
+    "mongo": "concurrently \"npm start\" \"npm run server/server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,8 +45,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "json-server": "^0.16.1"
+    "concurrently": "^5.1.0"
   },
   "proxy": "http://localhost:5000"
 }
