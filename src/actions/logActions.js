@@ -111,17 +111,17 @@ export const searchLogs = text => async dispatch => {
   })
 }
 
-export const setCurrent = log => dispatch => {
-  dispatch({
+export const setCurrent = log => {
+  return {
     type: SET_CURRENT,
     payload: log
-  })
+  }
 }
 
-export const clearCurrent = () => dispatch => {
-  dispatch({
+export const clearCurrent = () => {
+  return {
     type: CLEAR_CURRENT
-  })
+  }
 }
 
 // Set loading to true
