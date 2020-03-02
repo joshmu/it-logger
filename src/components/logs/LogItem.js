@@ -28,8 +28,8 @@ const LogItem = ({ log, removeLog, setCurrent }) => {
       </a>
       <br />
       <span className="grey-text">
-        <span className="black-text">ID #{log._id}</span> last updated by{' '}
-        <span className="black-text">{log.tech}</span> on{' '}
+        <span className="black-text">ID #{log._id.slice(0, 5)}</span> last
+        updated by <span className="black-text">{log.tech}</span> on{' '}
         <Moment format="MMMM Do YYYY, h:mm:ss a">{log.date}</Moment>
         <a href="#!" className="secondary-content">
           <i className="material-icons grey-text" onClick={onRemove}>

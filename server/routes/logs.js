@@ -4,7 +4,7 @@ const router = express.Router()
 const Log = require('../models/Log.js')
 
 /**
- * @route   GET /api/logs
+ * @route   GET /logs
  * @desc    Get all logs
  * @access  Public
  */
@@ -19,7 +19,25 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * @route   POST /api/logs
+ * @route   GET /logs/:_query
+ * @desc    Search Logs
+ * @access  Public
+ */
+router.get('/:query', async (req, res) => {
+  const regex = new RegExp(req.params.query, 'gi')
+  try {
+    const logs = await Log.find({
+      $or: [{ message: regex }, { tech: regex }]
+    }).lean()
+    res.json(logs)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+/**
+ * @route   POST /logs
  * @desc    Add new contact
  * @access  Public
  */
@@ -42,7 +60,7 @@ router.post('/', async (req, res) => {
 })
 
 /**
- * @route   PUT /api/logs/:_id
+ * @route   PUT /logs/:_id
  * @desc    Update contact
  * @access  Public
  */
@@ -73,7 +91,7 @@ router.put('/:_id', async (req, res) => {
 })
 
 /**
- * @route   DELETE /api/logs/:_id
+ * @route   DELETE /logs/:_id
  * @desc    Remove log
  * @access  Public
  */
