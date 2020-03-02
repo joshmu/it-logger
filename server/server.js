@@ -13,8 +13,8 @@ connectDB()
 app.use(express.json({ extended: false }))
 app.use(morgan('tiny'))
 
-app.use('/techs', require('./routes/techs.js'))
-app.use('/logs', require('./routes/logs.js'))
+app.use('/api/techs', require('./routes/techs.js'))
+app.use('/api/logs', require('./routes/logs.js'))
 
 // Serve static assets in production (react) << make sure this is after other routes
 if (process.env.NODE_ENV === 'production') {
