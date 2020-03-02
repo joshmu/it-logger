@@ -19,10 +19,10 @@ app.use('/logs', require('./routes/logs.js'))
 // Serve static assets in production (react) << make sure this is after other routes
 if (process.env.NODE_ENV === 'production') {
   // Set static folder (react client build folder)
-  app.use(express.static('../build'))
+  app.use(express.static(path.join(__dirname, 'build')))
   // Serve index.html file when any other route unspecified is hit
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
   )
 }
 
