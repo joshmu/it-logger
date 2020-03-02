@@ -20,7 +20,7 @@ const Techs = ({ techs, getTechs }) => {
               There are no technicians available.
             </li>
           ) : (
-            techs.map(tech => <TechItem key={tech.id} tech={tech} />)
+            techs.map(tech => <TechItem key={tech._id} tech={tech} />)
           )}
         </ul>
       </div>

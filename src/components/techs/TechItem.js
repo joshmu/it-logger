@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const TechItem = ({ tech, removeTech }) => {
   const onDelete = () => {
-    removeTech(tech.id)
+    removeTech(tech._id)
   }
 
   return (
