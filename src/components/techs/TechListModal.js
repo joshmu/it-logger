@@ -33,8 +33,8 @@ Techs.propTypes = {
   getTechs: PropTypes.func.isRequired
 }
 
-const mapPropsToState = state => {
+const mapStateToProps = state => {
   return { techs: state.techState.techs }
 }
 
-export default connect(mapPropsToState, { getTechs })(Techs)
+export default connect(mapStateToProps, { getTechs })(Techs)

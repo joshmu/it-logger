@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { addLog } from '../../actions/logActions'
+import { getTechs } from '../../actions/techActions'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import PropTypes from 'prop-types'
 
-const AddLogModal = ({ addLog }) => {
+const AddLogModal = ({ techs, addLog, getTechs }) => {
   const [message, setMessage] = useState('')
   const [attention, setAttention] = useState(false)
   const [tech, setTech] = useState('')
-
-  const [techs, setTechs] = useState([])
 
   useEffect(() => {
     getTechs()
     // eslint-disable-next-line
   }, [])
-
-  const getTechs = async () => {
-    const res = await fetch('/techs')
-    const data = await res.json()
-    setTechs(data)
-  }
 
   const onSubmit = async () => {
     if (message === '' || tech === '') {
@@ -112,7 +105,9 @@ const AddLogModal = ({ addLog }) => {
 }
 
 AddLogModal.propTypes = {
-  addLog: PropTypes.func.isRequired
+  addLog: PropTypes.func.isRequired,
+  getTechs: PropTypes.func.isRequired,
+  techs: PropTypes.array
 }
 
 const modalStyle = {
@@ -120,4 +115,10 @@ const modalStyle = {
   height: '75%'
 }
 
-export default connect(null, { addLog })(AddLogModal)
+const mapStateToProps = state => {
+  return {
+    techs: state.techState.techs
+  }
+}
+
+export default connect(mapStateToProps, { addLog, getTechs })(AddLogModal)
